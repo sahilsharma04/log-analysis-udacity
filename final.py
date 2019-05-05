@@ -11,13 +11,13 @@ def connect(database_name="news"):
 def first_querry():
     db = connect()
     c = db.cursor()
- c.execute("create view result as select title\
-        ,concat('/article/',slug) as sl from articles")
+    c.execute("create view result as select title\
+    ,concat('/article/',slug) as sl from articles")
     c.execute("create view name as select path , count(*)\
-     as num from log Join result on result.sl like log.path\
-      group by path order by num desc limit 3")
+    as num from log Join result on result.sl like log.path\
+    group by path order by num desc limit 3")
     c.execute("select title,num from name Join result on\
-     result.sl like name.path order by num desc")
+    result.sl like name.path order by num desc")
     row = c.fetchall()
     print("Most popular articles:")
     for i in range(len(row)):
@@ -28,15 +28,15 @@ def first_querry():
 def second_querry():
     db = connect()
     c = db.cursor()
-     c.execute("create view result1 as select author,\
-        concat('/article/',slug) as sl1 from articles")
+    c.execute("create view result1 as select author,\
+    concat('/article/',slug) as sl1 from articles")
     c.execute("create view name as select path , count(*)\
-     as num from log Join result1 on result1.sl1 like log.path group\
-        by path order by num desc")
+    as num from log Join result1 on result1.sl1 like log.path group\
+    by path order by num desc")
     c.execute("create view name1 as select author,num from name\
-     Join result1 on result1.sl1 like name.path order by num desc")
+    Join result1 on result1.sl1 like name.path order by num desc")
     c.execute("select name,sum(num) from name1 Join authors on\
-     authors.id=name1.author group by name order by sum desc")
+    authors.id=name1.author group by name order by sum desc")
     row = c.fetchall()
     print("Most popular authors:")
     for i in range(len(row)):
@@ -47,17 +47,17 @@ def second_querry():
 def third_querry():
     db = connect()
     c = db.cursor()
-  c.execute("create view status as select date(time) as date1,\
-        count(status) as stat from log group by date(time)")
+    c.execute("create view status as select date(time) as date1,\
+    count(status) as stat from log group by date(time)")
     c.execute("create view status4 as select date(time) as date1,\
-        status from log where status like '404%'")
+    status from log where status like '404%'")
     c.execute("create view status2 as select date1,count(status) as\
-     notf from status4 group by date1")
+    notf from status4 group by date1")
     c.execute("create view status5 as select status2.date1 as fdate,\
-        cast(notf as float),cast(stat as float) from status join status2 on\
-         status.date1=status2.date1")
+    cast(notf as float),cast(stat as float) from status join status2 on\
+    status.date1=status2.date1")
     c.execute("select fdate,(notf*100)/stat from status5 where\
-     (notf*100)/stat > 1")
+    (notf*100)/stat > 1")
     row = c.fetchall()
     print("Days with more than 1% errors:")
     for i in range(len(row)):
