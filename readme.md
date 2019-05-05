@@ -13,13 +13,24 @@ REQUIREMENTS AND INSTALLATION
 
 
 How to run
-change directory to vagrant directory then
+
+change directory to vagrant directory 
+then
 vagrant up command to run the vagrant on vm
-vagrant ssh to login into vm
+
+then vagrant ssh to login into vm
+
 change directory to vagrant
+
 use command psql -d news -f newsdata.sql to load database
+
+
 -use \c to connect to database="news"
+
 -use \dt to see the tables in database
+
 -use \dv to see the views in database
+
 -use \q to quit the database
+
 use command python log.py to run the programm
