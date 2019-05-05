@@ -15,13 +15,9 @@ REQUIREMENTS AND INSTALLATION
 How to run
 
 change directory to vagrant directory 
-then
-vagrant up command to run the vagrant on vm
-
-then vagrant ssh to login into vm
-
+then vagrant up command to run the vagrant on vm
+vagrant ssh to login into vm
 change directory to vagrant
-
 use command psql -d news -f newsdata.sql to load database
 
 
